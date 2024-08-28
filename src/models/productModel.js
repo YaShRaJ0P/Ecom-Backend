@@ -1,4 +1,5 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
+
 const productSchema = new Schema({
   name: {
     type: String,
@@ -54,7 +55,7 @@ const productSchema = new Schema({
   reviews: [
     {
       userId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
       },
       comment: {
@@ -88,4 +89,4 @@ productSchema.pre("save", function (next) {
   next();
 });
 
-module.exports = mongoose.model("Product", productSchema);
+module.exports = model("Product", productSchema);
