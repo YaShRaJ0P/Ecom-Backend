@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
     },
     lastname: {
       type: String,
-      required: [true, "lastname is required"],
+     
     },
     email: {
       type: String,
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
     },
     phoneNo: {
       type: Number,
-      required: [true, "phone number is required"],
+      
      
     },
     password: {
