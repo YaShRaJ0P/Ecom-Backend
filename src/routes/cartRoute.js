@@ -1,5 +1,5 @@
 import express from "express";
-import { AddToCart, GetCartProducts, RemoveFromCart, UpdateQuantity, emptyCart } from '../controllers/user/cart';
+import { AddToCart, GetCartProducts, RemoveFromCart, UpdateQuantity, emptyCart } from '../controllers/user/cartController';
 
 const router = express.Router();
 

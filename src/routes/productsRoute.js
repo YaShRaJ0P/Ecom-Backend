@@ -5,7 +5,7 @@ import {
   GetProductById,
   UpdateProduct,
   DeleteProduct,
-} from "../controllers/products";
+} from "../controllers/admin/productController";
 import { upload } from "../middlewares/Multer";
 
 const router = express.Router();

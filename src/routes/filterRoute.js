@@ -1,4 +1,4 @@
-import { GetFilteredProducts } from "../controllers/user/filter";
+import { GetFilteredProducts } from "../controllers/user/filterController";
 
 const router = express.Router();
 
