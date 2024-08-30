@@ -1,7 +1,4 @@
-import express from "express";
 import Product from "../models/productModel";
-
-const router = express.Router();
 
 export const GetFilteredProducts = async (req, res) => {
   try {
@@ -43,5 +40,3 @@ export const GetFilteredProducts = async (req, res) => {
     return res.status(500).json({ message: "Server Error." });
   }
 };
-
-export default router;

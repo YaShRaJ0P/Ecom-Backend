@@ -3,33 +3,54 @@ import Product from "../../models/productModel";
 // Add a new product
 export const AddProduct = async (req, res) => {
   try {
-    const { name, description, price, stock, category, brand, sizes, colors } =
-      req.body;
+    const {
+      name,
+      category,
+      subcategory,
+      type,
+      description,
+      price,
+      stock,
+      sizes,
+      colors,
+    } = req.body;
 
     // Validate input
     if (
       !name ||
+      !category ||
+      !subcategory ||
+      !type ||
       !description ||
       !price ||
       !stock ||
-      !category ||
-      !brand ||
       !sizes ||
       !colors
     ) {
       return res.status(400).send({ message: "All fields are required." });
     }
 
+    const imageFiles = req.files; // req.files will contain all uploaded images
+    if (!imageFiles || imageFiles.length === 0) {
+      return res
+        .status(400)
+        .json({ message: "At least one image is required" });
+    }
+
+    // Extract image paths or URLs (depends on upload configuration)
+    const imagePaths = imageFiles.map((file) => file.path);
+
     const product = new Product({
       name,
+      category,
+      subcategory,
+      type,
       description,
       price: parseFloat(price),
       stock: parseInt(stock),
-      category,
-      brand,
       sizes,
       colors,
-      images: req.files?.map((file) => file.filename) || [], // Handle multiple image uploads
+      images: imagePaths,
     });
 
     const savedProduct = await product.save();
@@ -68,35 +89,58 @@ export const GetProductById = async (req, res) => {
 // Update a product
 export const UpdateProduct = async (req, res) => {
   try {
-    const { name, description, price, stock, category, brand, sizes, colors } =
-      req.body;
+    const {
+      name,
+      category,
+      subcategory,
+      type,
+      description,
+      price,
+      stock,
+      sizes,
+      colors,
+    } = req.body;
 
-    // Validate input
+    // Validate input (allow partial updates)
     if (
       !name ||
+      !category ||
+      !subcategory ||
+      !type ||
       !description ||
       !price ||
       !stock ||
-      !category ||
-      !brand ||
       !sizes ||
       !colors
     ) {
-      return res.status(400).send({ message: "All fields are required." });
+      return res
+        .status(400)
+        .send({ message: "At least one field is required to update." });
     }
+
+    const imageFiles = req.files; // req.files will contain all uploaded images
+    if (!imageFiles || imageFiles.length === 0) {
+      return res
+        .status(400)
+        .json({ message: "At least one image is required" });
+    }
+
+    // Extract image paths or URLs (depends on upload configuration)
+    const imagePaths = imageFiles.map((file) => file.path);
 
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       {
         name,
+        category,
+        subcategory,
+        type,
         description,
         price: parseFloat(price),
         stock: parseInt(stock),
-        category,
-        brand,
         sizes,
         colors,
-        images: req.files?.map((file) => file.filename) || req.body.images, // Handle image updates
+        images: imagePaths,
       },
       { new: true, runValidators: true }
     );
@@ -104,10 +148,8 @@ export const UpdateProduct = async (req, res) => {
     if (!updatedProduct) {
       return res.status(404).send({ message: "Product not found." });
     }
-    return res.status(200).send({
-      message: "Product Updated Successfully.",
-      product: updatedProduct,
-    });
+
+    return res.status(200).send({ message: "Product Updated Successfully." });
   } catch (err) {
     console.error(`Server error: ${err}`);
     return res.status(500).send({ message: "Server Error." });

@@ -1,18 +1,6 @@
 import { Schema, module } from "mongoose";
 // Define the Cart Item schema
 const cartItemSchema = new Schema({
-  productId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
   quantity: {
     type: Number,
     required: true,
@@ -28,20 +16,11 @@ const cartItemSchema = new Schema({
     type: String,
     required: true,
   },
-  image: {
-    type: String,
-    required: true,
-  },
 });
 
 // Define the Cart schema
 const cartSchema = new Schema(
   {
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
     items: [cartItemSchema],
     totalPrice: {
       type: Number,

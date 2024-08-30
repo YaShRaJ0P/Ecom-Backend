@@ -11,7 +11,7 @@ import { upload } from "../middlewares/Multer";
 const router = express.Router();
 
 // Route for saving a new product
-router.post("/", upload.single("image"), (req, res) => AddProduct(req, res));
+router.post("/", upload.array("images", 10), (req, res) => AddProduct(req, res));
 
 // Route to get all products
 router.get("/", (req, res) => GetProducts(req, res));

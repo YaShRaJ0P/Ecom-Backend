@@ -3,7 +3,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { _config } from "../config/config.js";
 
-
 const userSchema = new mongoose.Schema(
   {
     firstname: {
@@ -12,7 +11,6 @@ const userSchema = new mongoose.Schema(
     },
     lastname: {
       type: String,
-     
     },
     email: {
       type: String,
@@ -21,8 +19,6 @@ const userSchema = new mongoose.Schema(
     },
     phoneNo: {
       type: Number,
-      
-     
     },
     password: {
       type: String,
@@ -45,8 +41,11 @@ const userSchema = new mongoose.Schema(
     isVerified: {
       type: Boolean,
       default: false,
-    }
-    
+    },
+    cartList: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Cart",
+    },
   },
 
   { timestamps: true }
