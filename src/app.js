@@ -6,6 +6,7 @@ import userRoute from "./routes/user/userRoute.js";
 import productRoute from "./routes/admin/productRoute.js";
 import orderRoute from "./routes/admin/orderRoute.js";
 import paymentRoute from "./routes/user/paymentRoute.js";
+import helmet from "helmet";
 
 
 //create express app
@@ -23,6 +24,7 @@ app.use(
 
 
 //set up middlewares
+app.use(helmet())
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.static("public"));
