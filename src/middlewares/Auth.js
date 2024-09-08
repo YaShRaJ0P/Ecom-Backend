@@ -5,7 +5,7 @@ import { _config } from "../config/config.js";
 
 const isLoggedIn = async (req, res, next) => {
   try {
-    const accessToken = req.cookies;
+    const accessToken = req.cookies.access_token;
     console.log("Access token:", accessToken);
 
     if (!accessToken) {

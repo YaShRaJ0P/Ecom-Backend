@@ -2,10 +2,10 @@ import express from "express";
 import errorHandler from "./middlewares/ErrorHandler.js";
 import cookieParser from "cookie-parser"
 import cors from "cors";
-import userRoute from "./routes/userRoute.js";
-import productRoute from "./routes/productRoute.js";
-import orderRoute from "./routes/orderRoute.js";
-import paymentRoute from "./routes/paymentRoute.js";
+import userRoute from "./routes/user/userRoute.js";
+import productRoute from "./routes/admin/productRoute.js";
+import orderRoute from "./routes/admin/orderRoute.js";
+import paymentRoute from "./routes/user/paymentRoute.js";
 
 
 //create express app

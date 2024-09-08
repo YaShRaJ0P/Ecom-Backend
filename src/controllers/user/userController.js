@@ -1,11 +1,11 @@
 import createHttpError from "http-errors";
-import usermodel from "../models/userModel.js";
-import createActivationToken from "../helper/activationToken.js";
-import emailHelper from "../utils/EmailHelper.js";
-import cookieToken from "../utils/cookieToken.js";
+import usermodel from "../../models/userModel.js";
+import createActivationToken from "../../helper/activationToken.js";
+import emailHelper from "../../utils/EmailHelper.js";
+import cookieToken from "../../utils/cookieToken.js";
 import jwt from "jsonwebtoken";
-import { _config } from "../config/config.js";
-import { redis } from "../config/redis.js";
+import { _config } from "../../config/config.js";
+import { redis } from "../../config/redis.js";
 
 const register = async (req, res, next) => {
   try {
@@ -142,4 +142,9 @@ const logout = async (req, res, next) => {
   }
 };
 
-export { register, verifyOtp, login, logout };
+const checkRateLimit = async(req,res,next)=>{
+  res.json({success:true,msg:"check rate limiter...."})
+
+}
+
+export { register, verifyOtp, login, logout ,checkRateLimit};

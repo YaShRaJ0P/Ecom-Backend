@@ -1,6 +1,6 @@
 
 import { Router } from "express";
-import { paymentMethod } from "../controllers/paymentController.js";
+import { paymentMethod } from "../../controllers/user/paymentController.js";
 
 
 
